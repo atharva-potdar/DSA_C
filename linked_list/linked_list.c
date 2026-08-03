@@ -14,6 +14,9 @@ struct LinkedList {
 
 static Node *node_new(int value) {
     Node *node = (Node *) malloc(sizeof(Node));
+    if (node == NULL) {
+        return NULL;
+    }
 
     node->value = value;
     node->next = NULL;
@@ -23,6 +26,9 @@ static Node *node_new(int value) {
 
 LinkedList *linked_list_new(void) {
     LinkedList *list = (LinkedList *) malloc(sizeof(LinkedList));
+    if (list == NULL) {
+        return NULL;
+    }
 
     list->head = NULL;
     list->length = 0;
@@ -111,15 +117,17 @@ int linked_list_is_empty(const LinkedList *list) {
 }
 
 int linked_list_get(const LinkedList *list, size_t index) {
-    Node *curr = list->head;
-    for (size_t i = 0; curr != NULL && i < index; i++, curr = curr->next);
+    const Node *curr = list->head;
+    for (size_t i = 0; curr != NULL && i < index; i++, curr = curr->next) {}
 
-    if (curr == NULL) return -1;
+    if (curr == NULL) {
+        return -1;
+    }
     return curr->value;
 }
 
 int linked_list_contains(const LinkedList *list, int value) {
-    Node *curr = list->head;
+    const Node *curr = list->head;
     while (curr != NULL) {
         if (curr->value == value) {
             return 1;
@@ -136,9 +144,11 @@ void linked_list_insert(LinkedList *list, size_t index, int value) {
     }
 
     Node *curr = list->head;
-    for (size_t i = 0; curr != NULL && i < index - 1; i++, curr = curr->next);
+    for (size_t i = 0; curr != NULL && i < index - 1; i++, curr = curr->next) {}
 
-    if (curr == NULL) return;
+    if (curr == NULL) {
+        return;
+    }
 
     Node *node = node_new(value);
     node->next = curr->next;
@@ -153,7 +163,11 @@ int linked_list_remove(LinkedList *list, size_t index) {
 
     Node *curr = list->head;
 
-    for (size_t i = 0; curr->next != NULL && i < index - 1; i++, curr = curr->next);
+    for (size_t i = 0; curr->next != NULL && i < index - 1; i++, curr = curr->next) {}
+
+    if (curr->next == NULL) {
+        return -1;
+    }
 
     Node *removed = curr->next;
     int value = removed->value;
@@ -179,10 +193,12 @@ void linked_list_reverse(LinkedList *list) {
 }
 
 void linked_list_print(const LinkedList *list) {
-    Node *curr = list->head;
+    const Node *curr = list->head;
     while (curr != NULL) {
         printf("%d", curr->value);
-        if (curr->next != NULL) printf(" -> ");
+        if (curr->next != NULL) {
+            printf(" -> ");
+        }
         curr = curr->next;
     }
 }

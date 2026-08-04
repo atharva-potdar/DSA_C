@@ -54,6 +54,7 @@ void linked_list_free(LinkedList *list) {
 
 void linked_list_push_front(LinkedList *list, int value) {
     Node *node = node_new(value);
+    if (node == NULL) { return; }
     node->next = list->head;
     list->head = node;
     list->length++;
@@ -62,7 +63,9 @@ void linked_list_push_front(LinkedList *list, int value) {
 void linked_list_push_back(LinkedList *list, int value) {
     Node *curr = list->head;
     if (curr == NULL) {
-        list->head = node_new(value);
+        Node *node = node_new(value);
+        if (node == NULL) { return; }
+        list->head = node;
         list->length++;
         return;
     }
@@ -72,6 +75,7 @@ void linked_list_push_back(LinkedList *list, int value) {
     }
 
     Node *node = node_new(value);
+    if (node == NULL) { return; }
     curr->next = node;
     list->length++;
 }
@@ -151,6 +155,7 @@ void linked_list_insert(LinkedList *list, size_t index, int value) {
     }
 
     Node *node = node_new(value);
+    if (node == NULL) { return; }
     node->next = curr->next;
     curr->next = node;
     list->length++;

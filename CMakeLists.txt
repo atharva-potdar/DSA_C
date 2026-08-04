@@ -37,3 +37,9 @@ add_library(linked_list linked_list/linked_list.c)
 target_include_directories(linked_list PUBLIC linked_list)
 add_executable(linked_list_example linked_list/examples/linked_list_example.c)
 target_link_libraries(linked_list_example linked_list)
+
+# Doubly Linked List
+add_library(doubly_linked_list doubly_linked_list/doubly_linked_list.c)
+target_include_directories(doubly_linked_list PUBLIC doubly_linked_list)
+add_executable(doubly_linked_list_example doubly_linked_list/examples/doubly_linked_list_example.c)
+target_link_libraries(doubly_linked_list_example doubly_linked_list)

@@ -30,3 +30,5 @@ cmake --build build
 |---|---|---|---|
 | Singly Linked List | [linked_list.h](linked_list/linked_list.h) | [linked_list.c](linked_list/linked_list.c) | [example](linked_list/examples/linked_list_example.c) |
 | Doubly Linked List | [doubly_linked_list.h](doubly_linked_list/doubly_linked_list.h) | [doubly_linked_list.c](doubly_linked_list/doubly_linked_list.c) | [example](doubly_linked_list/examples/doubly_linked_list_example.c) |
+| Stack (array) | [stack_array.h](stack/stack_array.h) | [stack_array.c](stack/stack_array.c) | [example](stack/examples/stack_array_example.c) |
+| Stack (list) | [stack_list.h](stack/stack_list.h) | [stack_list.c](stack/stack_list.c) | [example](stack/examples/stack_list_example.c) |

@@ -33,13 +33,17 @@ void queue_list_free(QueueList *queue) {
     free(queue);
 }
 
-void queue_list_enqueue(QueueList *queue, int value) {
+static Node *node_new(int value) {
     Node *node = (Node *) malloc(sizeof(Node));
-    if (node == NULL) {
-        return;
-    }
+    if (node == NULL) { return NULL; }
     node->value = value;
     node->next = NULL;
+    return node;
+}
+
+void queue_list_enqueue(QueueList *queue, int value) {
+    Node *node = node_new(value);
+    if (node == NULL) { return; }
     if (queue->tail != NULL) {
         queue->tail->next = node;
     } else {

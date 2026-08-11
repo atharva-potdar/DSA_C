@@ -33,12 +33,17 @@ void stack_list_free(StackList *stack) {
     free(stack);
 }
 
-void stack_list_push(StackList *stack, int value) {
+static Node *node_new(int value) {
     Node *node = (Node *) malloc(sizeof(Node));
-    if (node == NULL) {
-        return;
-    }
+    if (node == NULL) { return NULL; }
     node->value = value;
+    node->next = NULL;
+    return node;
+}
+
+void stack_list_push(StackList *stack, int value) {
+    Node *node = node_new(value);
+    if (node == NULL) { return; }
     node->next = stack->head;
     stack->head = node;
     stack->length++;

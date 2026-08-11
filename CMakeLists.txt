@@ -14,7 +14,7 @@ find_program(CLANG_TIDY clang-tidy)
 if(CLANG_TIDY)
     set(CMAKE_C_CLANG_TIDY
         clang-tidy
-        --checks=*,-llvmlibc-*,-altera-*,-modernize-*,-hicpp-*,-cppcoreguidelines-*,-llvm-header-guard,-readability-magic-numbers,-bugprone-easily-swappable-parameters
+        --checks=*,-llvmlibc-*,-altera-*,-modernize-*,-hicpp-*,-cppcoreguidelines-*,-llvm-header-guard,-readability-magic-numbers,-bugprone-easily-swappable-parameters,-misc-no-recursion
         --extra-arg=-std=c23
     )
 endif()
@@ -67,3 +67,9 @@ add_library(queue_list queue/queue_list.c)
 target_include_directories(queue_list PUBLIC queue)
 add_executable(queue_list_example queue/examples/queue_list_example.c)
 target_link_libraries(queue_list_example queue_list)
+
+# Binary Search Tree
+add_library(bst bst/bst.c)
+target_include_directories(bst PUBLIC bst)
+add_executable(bst_example bst/examples/bst_example.c)
+target_link_libraries(bst_example bst)

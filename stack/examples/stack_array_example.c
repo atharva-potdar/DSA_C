@@ -1,8 +1,9 @@
 #include "../stack_array.h"
 #include <stdio.h>
 
-int main(void) {
-    StackArray *stack = stack_array_new();
+int main(void)
+{
+    StackArray* stack = stack_array_new();
 
     stack_array_push(stack, 1);
     stack_array_push(stack, 2);

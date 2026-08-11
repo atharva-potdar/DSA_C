@@ -1,8 +1,9 @@
 #include "../queue_array.h"
 #include <stdio.h>
 
-int main(void) {
-    QueueArray *queue = queue_array_new();
+int main(void)
+{
+    QueueArray* queue = queue_array_new();
 
     queue_array_enqueue(queue, 1);
     queue_array_enqueue(queue, 2);

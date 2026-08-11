@@ -4,18 +4,19 @@
 
 typedef struct Node {
     int value;
-    struct Node *prev;
-    struct Node *next;
+    struct Node* prev;
+    struct Node* next;
 } Node;
 
 struct DoublyLinkedList {
-    Node *head;
-    Node *tail;
+    Node* head;
+    Node* tail;
     size_t length;
 };
 
-static Node *node_new(int value) {
-    Node *node = (Node *) malloc(sizeof(Node));
+static Node* node_new(int value)
+{
+    Node* node = (Node*)malloc(sizeof(Node));
     if (node == NULL) {
         return NULL;
     }
@@ -27,8 +28,9 @@ static Node *node_new(int value) {
     return node;
 }
 
-DoublyLinkedList *doubly_linked_list_new(void) {
-    DoublyLinkedList *list = (DoublyLinkedList *) malloc(sizeof(DoublyLinkedList));
+DoublyLinkedList* doubly_linked_list_new(void)
+{
+    DoublyLinkedList* list = (DoublyLinkedList*)malloc(sizeof(DoublyLinkedList));
     if (list == NULL) {
         return NULL;
     }
@@ -40,10 +42,11 @@ DoublyLinkedList *doubly_linked_list_new(void) {
     return list;
 }
 
-void doubly_linked_list_clear(DoublyLinkedList *list) {
-    Node *curr = list->head;
+void doubly_linked_list_clear(DoublyLinkedList* list)
+{
+    Node* curr = list->head;
     while (curr != NULL) {
-        Node *next = curr->next;
+        Node* next = curr->next;
         free(curr);
         curr = next;
     }
@@ -53,14 +56,18 @@ void doubly_linked_list_clear(DoublyLinkedList *list) {
     list->length = 0;
 }
 
-void doubly_linked_list_free(DoublyLinkedList *list) {
+void doubly_linked_list_free(DoublyLinkedList* list)
+{
     doubly_linked_list_clear(list);
     free(list);
 }
 
-void doubly_linked_list_push_front(DoublyLinkedList *list, int value) {
-    Node *node = node_new(value);
-    if (node == NULL) { return; }
+void doubly_linked_list_push_front(DoublyLinkedList* list, int value)
+{
+    Node* node = node_new(value);
+    if (node == NULL) {
+        return;
+    }
     node->next = list->head;
     if (list->head != NULL) {
         list->head->prev = node;
@@ -71,9 +78,12 @@ void doubly_linked_list_push_front(DoublyLinkedList *list, int value) {
     list->length++;
 }
 
-void doubly_linked_list_push_back(DoublyLinkedList *list, int value) {
-    Node *node = node_new(value);
-    if (node == NULL) { return; }
+void doubly_linked_list_push_back(DoublyLinkedList* list, int value)
+{
+    Node* node = node_new(value);
+    if (node == NULL) {
+        return;
+    }
     node->prev = list->tail;
     if (list->tail != NULL) {
         list->tail->next = node;
@@ -84,8 +94,9 @@ void doubly_linked_list_push_back(DoublyLinkedList *list, int value) {
     list->length++;
 }
 
-int doubly_linked_list_pop_front(DoublyLinkedList *list) {
-    Node *oldHead = list->head;
+int doubly_linked_list_pop_front(DoublyLinkedList* list)
+{
+    Node* oldHead = list->head;
     int value = oldHead->value;
     list->head = oldHead->next;
     if (list->head != NULL) {
@@ -98,8 +109,9 @@ int doubly_linked_list_pop_front(DoublyLinkedList *list) {
     return value;
 }
 
-int doubly_linked_list_pop_back(DoublyLinkedList *list) {
-    Node *oldTail = list->tail;
+int doubly_linked_list_pop_back(DoublyLinkedList* list)
+{
+    Node* oldTail = list->tail;
     int value = oldTail->value;
     list->tail = oldTail->prev;
     if (list->tail != NULL) {
@@ -112,18 +124,21 @@ int doubly_linked_list_pop_back(DoublyLinkedList *list) {
     return value;
 }
 
-size_t doubly_linked_list_len(const DoublyLinkedList *list) {
+size_t doubly_linked_list_len(const DoublyLinkedList* list)
+{
     return list->length;
 }
 
-int doubly_linked_list_is_empty(const DoublyLinkedList *list) {
+int doubly_linked_list_is_empty(const DoublyLinkedList* list)
+{
     return list->length == 0;
 }
 
-int doubly_linked_list_get(const DoublyLinkedList *list, size_t index) {
-    const Node *curr = list->head;
-    
-    for (size_t i = 0; curr != NULL && i < index; i++, curr = curr->next) {}
+int doubly_linked_list_get(const DoublyLinkedList* list, size_t index)
+{
+    const Node* curr = list->head;
+
+    for (size_t i = 0; curr != NULL && i < index; i++, curr = curr->next) { }
 
     if (curr == NULL) {
         return -1;
@@ -131,8 +146,9 @@ int doubly_linked_list_get(const DoublyLinkedList *list, size_t index) {
     return curr->value;
 }
 
-int doubly_linked_list_contains(const DoublyLinkedList *list, int value) {
-    const Node *curr = list->head;
+int doubly_linked_list_contains(const DoublyLinkedList* list, int value)
+{
+    const Node* curr = list->head;
 
     while (curr != NULL) {
         if (curr->value == value) {
@@ -144,21 +160,24 @@ int doubly_linked_list_contains(const DoublyLinkedList *list, int value) {
     return 0;
 }
 
-void doubly_linked_list_insert(DoublyLinkedList *list, size_t index, int value) {
+void doubly_linked_list_insert(DoublyLinkedList* list, size_t index, int value)
+{
     if (index == 0) {
         doubly_linked_list_push_front(list, value);
         return;
     }
 
-    Node *curr = list->head;
-    for (size_t i = 0; curr != NULL && i < index - 1; i++, curr = curr->next) {}
+    Node* curr = list->head;
+    for (size_t i = 0; curr != NULL && i < index - 1; i++, curr = curr->next) { }
 
     if (curr == NULL) {
         return;
     }
 
-    Node *node = node_new(value);
-    if (node == NULL) { return; }
+    Node* node = node_new(value);
+    if (node == NULL) {
+        return;
+    }
     node->next = curr->next;
     node->prev = curr;
     if (curr->next != NULL) {
@@ -170,20 +189,21 @@ void doubly_linked_list_insert(DoublyLinkedList *list, size_t index, int value) 
     list->length++;
 }
 
-int doubly_linked_list_remove(DoublyLinkedList *list, size_t index) {
+int doubly_linked_list_remove(DoublyLinkedList* list, size_t index)
+{
     if (index == 0) {
         return doubly_linked_list_pop_front(list);
     }
 
-    Node *curr = list->head;
+    Node* curr = list->head;
 
-    for (size_t i = 0; curr->next != NULL && i < index - 1; i++, curr = curr->next) {}
+    for (size_t i = 0; curr->next != NULL && i < index - 1; i++, curr = curr->next) { }
 
     if (curr->next == NULL) {
         return -1;
     }
 
-    Node *removed = curr->next;
+    Node* removed = curr->next;
     int value = removed->value;
     curr->next = removed->next;
     if (removed->next != NULL) {
@@ -197,8 +217,9 @@ int doubly_linked_list_remove(DoublyLinkedList *list, size_t index) {
     return value;
 }
 
-void doubly_linked_list_print(const DoublyLinkedList *list) {
-    const Node *curr = list->head;
+void doubly_linked_list_print(const DoublyLinkedList* list)
+{
+    const Node* curr = list->head;
     while (curr != NULL) {
         printf("%d", curr->value);
         if (curr->next != NULL) {
@@ -208,8 +229,9 @@ void doubly_linked_list_print(const DoublyLinkedList *list) {
     }
 }
 
-void doubly_linked_list_print_reverse(const DoublyLinkedList *list) {
-    const Node *curr = list->tail;
+void doubly_linked_list_print_reverse(const DoublyLinkedList* list)
+{
+    const Node* curr = list->tail;
     while (curr != NULL) {
         printf("%d", curr->value);
         if (curr->prev != NULL) {

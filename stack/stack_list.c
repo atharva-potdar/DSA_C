@@ -3,16 +3,17 @@
 
 typedef struct Node {
     int value;
-    struct Node *next;
+    struct Node* next;
 } Node;
 
 struct StackList {
-    Node *head;
+    Node* head;
     size_t length;
 };
 
-StackList *stack_list_new(void) {
-    StackList *stack = (StackList *) malloc(sizeof(StackList));
+StackList* stack_list_new(void)
+{
+    StackList* stack = (StackList*)malloc(sizeof(StackList));
     if (stack == NULL) {
         return NULL;
     }
@@ -23,37 +24,45 @@ StackList *stack_list_new(void) {
     return stack;
 }
 
-void stack_list_free(StackList *stack) {
-    Node *node = stack->head;
+void stack_list_free(StackList* stack)
+{
+    Node* node = stack->head;
     while (node != NULL) {
-        Node *next = node->next;
+        Node* next = node->next;
         free(node);
         node = next;
     }
     free(stack);
 }
 
-static Node *node_new(int value) {
-    Node *node = (Node *) malloc(sizeof(Node));
-    if (node == NULL) { return NULL; }
+static Node* node_new(int value)
+{
+    Node* node = (Node*)malloc(sizeof(Node));
+    if (node == NULL) {
+        return NULL;
+    }
     node->value = value;
     node->next = NULL;
     return node;
 }
 
-void stack_list_push(StackList *stack, int value) {
-    Node *node = node_new(value);
-    if (node == NULL) { return; }
+void stack_list_push(StackList* stack, int value)
+{
+    Node* node = node_new(value);
+    if (node == NULL) {
+        return;
+    }
     node->next = stack->head;
     stack->head = node;
     stack->length++;
 }
 
-int stack_list_pop(StackList *stack) {
+int stack_list_pop(StackList* stack)
+{
     if (stack->head == NULL) {
         return -1;
     }
-    Node *node = stack->head;
+    Node* node = stack->head;
     stack->head = node->next;
     int value = node->value;
     free(node);
@@ -61,17 +70,20 @@ int stack_list_pop(StackList *stack) {
     return value;
 }
 
-int stack_list_peek(const StackList *stack) {
+int stack_list_peek(const StackList* stack)
+{
     if (stack->head == NULL) {
         return -1;
     }
     return stack->head->value;
 }
 
-size_t stack_list_len(const StackList *stack) {
+size_t stack_list_len(const StackList* stack)
+{
     return stack->length;
 }
 
-int stack_list_is_empty(const StackList *stack) {
+int stack_list_is_empty(const StackList* stack)
+{
     return stack->length == 0;
 }

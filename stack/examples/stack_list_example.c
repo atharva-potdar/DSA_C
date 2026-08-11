@@ -1,8 +1,9 @@
 #include "../stack_list.h"
 #include <stdio.h>
 
-int main(void) {
-    StackList *stack = stack_list_new();
+int main(void)
+{
+    StackList* stack = stack_list_new();
 
     stack_list_push(stack, 1);
     stack_list_push(stack, 2);

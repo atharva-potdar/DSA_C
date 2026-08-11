@@ -1,8 +1,9 @@
 #include "../queue_list.h"
 #include <stdio.h>
 
-int main(void) {
-    QueueList *queue = queue_list_new();
+int main(void)
+{
+    QueueList* queue = queue_list_new();
 
     queue_list_enqueue(queue, 1);
     queue_list_enqueue(queue, 2);

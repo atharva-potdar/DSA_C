@@ -1,8 +1,9 @@
 #include "../doubly_linked_list.h"
 #include <stdio.h>
 
-int main(void) {
-    DoublyLinkedList *list = doubly_linked_list_new();
+int main(void)
+{
+    DoublyLinkedList* list = doubly_linked_list_new();
 
     doubly_linked_list_push_back(list, 1);
     doubly_linked_list_push_back(list, 2);

@@ -1,8 +1,9 @@
 #include "../bst.h"
 #include <stdio.h>
 
-int main(void) {
-    BST *bst = bst_new();
+int main(void)
+{
+    BST* bst = bst_new();
 
     bst_insert(bst, 10);
     bst_insert(bst, 5);

@@ -4,19 +4,20 @@
 #define INITIAL_CAPACITY 16
 
 struct QueueArray {
-    int *data;
+    int* data;
     size_t head;
     size_t tail;
     size_t length;
     size_t capacity;
 };
 
-QueueArray *queue_array_new(void) {
-    QueueArray *queue = (QueueArray *) malloc(sizeof(QueueArray));
+QueueArray* queue_array_new(void)
+{
+    QueueArray* queue = (QueueArray*)malloc(sizeof(QueueArray));
     if (queue == NULL) {
         return NULL;
     }
-    int *data = (int *) malloc(INITIAL_CAPACITY * sizeof(int));
+    int* data = (int*)malloc(INITIAL_CAPACITY * sizeof(int));
     if (data == NULL) {
         free(queue);
         return NULL;
@@ -29,16 +30,18 @@ QueueArray *queue_array_new(void) {
     return queue;
 }
 
-void queue_array_free(QueueArray *queue) {
+void queue_array_free(QueueArray* queue)
+{
     free(queue->data);
     free(queue);
 }
 
-void queue_array_enqueue(QueueArray *queue, int value) {
+void queue_array_enqueue(QueueArray* queue, int value)
+{
     if (queue->length == queue->capacity) {
         size_t old_capacity = queue->capacity;
         size_t new_capacity = queue->capacity << 1;
-        int *data = (int *) realloc(queue->data, new_capacity * sizeof(int));
+        int* data = (int*)realloc(queue->data, new_capacity * sizeof(int));
         if (data == NULL) {
             return;
         }
@@ -58,7 +61,8 @@ void queue_array_enqueue(QueueArray *queue, int value) {
     queue->length++;
 }
 
-int queue_array_dequeue(QueueArray *queue) {
+int queue_array_dequeue(QueueArray* queue)
+{
     if (queue->length == 0) {
         return -1;
     }
@@ -68,17 +72,20 @@ int queue_array_dequeue(QueueArray *queue) {
     return value;
 }
 
-int queue_array_peek(const QueueArray *queue) {
+int queue_array_peek(const QueueArray* queue)
+{
     if (queue->length == 0) {
         return -1;
     }
     return *(queue->data + queue->head);
 }
 
-size_t queue_array_len(const QueueArray *queue) {
+size_t queue_array_len(const QueueArray* queue)
+{
     return queue->length;
 }
 
-int queue_array_is_empty(const QueueArray *queue) {
+int queue_array_is_empty(const QueueArray* queue)
+{
     return queue->length == 0;
 }

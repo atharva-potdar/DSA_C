@@ -32,6 +32,19 @@ if(CPPCHECK)
     )
 endif()
 
+find_program(CLANG_FORMAT clang-format)
+if(CLANG_FORMAT)
+    file(GLOB_RECURSE ALL_SOURCE_FILES
+        ${CMAKE_SOURCE_DIR}/*.c
+        ${CMAKE_SOURCE_DIR}/*.h
+    )
+    list(FILTER ALL_SOURCE_FILES EXCLUDE REGEX "${CMAKE_BINARY_DIR}/.*")
+    add_custom_target(format_check ALL
+        COMMAND ${CLANG_FORMAT} --dry-run --Werror ${ALL_SOURCE_FILES}
+        COMMENT "Checking formatting..."
+    )
+endif()
+
 # Linked List
 add_library(linked_list linked_list/linked_list.c)
 target_include_directories(linked_list PUBLIC linked_list)

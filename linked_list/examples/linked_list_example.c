@@ -1,8 +1,9 @@
 #include "../linked_list.h"
 #include <stdio.h>
 
-int main(void) {
-    LinkedList *list = linked_list_new();
+int main(void)
+{
+    LinkedList* list = linked_list_new();
 
     linked_list_push_back(list, 1);
     linked_list_push_back(list, 2);

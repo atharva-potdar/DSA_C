@@ -39,3 +39,4 @@ cmake --build build
 | Queue (array) | [queue_array.h](queue/queue_array.h) | [queue_array.c](queue/queue_array.c) | [example](queue/examples/queue_array_example.c) |
 | Queue (list) | [queue_list.h](queue/queue_list.h) | [queue_list.c](queue/queue_list.c) | [example](queue/examples/queue_list_example.c) |
 | Binary Search Tree | [bst.h](bst/bst.h) | [bst.c](bst/bst.c) | [example](bst/examples/bst_example.c) |
+| AVL Tree | [avl.h](avl/avl.h) | [avl.c](avl/avl.c) | [example](avl/examples/avl_example.c) |

@@ -86,3 +86,9 @@ add_library(bst bst/bst.c)
 target_include_directories(bst PUBLIC bst)
 add_executable(bst_example bst/examples/bst_example.c)
 target_link_libraries(bst_example bst)
+
+# AVL Tree
+add_library(avl avl/avl.c)
+target_include_directories(avl PUBLIC avl)
+add_executable(avl_example avl/examples/avl_example.c)
+target_link_libraries(avl_example avl)
